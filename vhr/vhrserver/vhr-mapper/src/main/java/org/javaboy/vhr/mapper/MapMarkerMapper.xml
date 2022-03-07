@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.javaboy.vhr.mapper.MapMarkerMapper">
+    <resultMap id="Markers" type="org.javaboy.vhr.model.MapMarker">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="text" property="text" jdbcType="VARCHAR" />
+        <result column="marker_lat" property="marker_lat" jdbcType="VARCHAR" />
+        <result column="marker_lng" property="marker_lng" jdbcType="VARCHAR" />
+        <result column="zoom" property="zoom" jdbcType="INTEGER" />
+        <result column="create_time" property="create_time" jdbcType="DATE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id,name,text,marker_lat,marker_lng,zoom,create_time
+    </sql>
+    <insert id="insertMapMarker" parameterType="org.javaboy.vhr.model.MapMarker">
+        insert into map_marker (id, name, text,
+                          marker_lat, marker_lng, zoom,create_time)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR},
+                #{marker_lat,jdbcType=VARCHAR}, #{marker_lng,jdbcType=VARCHAR}, #{zoom,jdbcType=INTEGER},#{create_time,jdbcType=DATE})
+    </insert>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from map_marker
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <update id="updateById" parameterType="org.javaboy.vhr.model.MapMarker">
+        update map_marker
+        set name = #{name,jdbcType=VARCHAR},
+            text = #{text,jdbcType=VARCHAR},
+            marker_lat = #{marker_lat,jdbcType=VARCHAR},
+            marker_lng = #{marker_lng,jdbcType=VARCHAR},
+            zoom = #{zoom,jdbcType=INTEGER},
+            create_time = #{create_time,jdbcType=DATE}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectAll" resultMap="Markers">
+        select
+        <include refid="Base_Column_List" />
+        from map_marker
+    </select>
+</mapper>

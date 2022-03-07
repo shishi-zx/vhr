@@ -20,7 +20,7 @@ import java.util.List;
  * @时间 2019-09-27 7:10
  */
 @RestController
-@RequestMapping("/system/config")
+@RequestMapping("/system/config")   
 public class SystemConfigController {
     @Autowired
     MenuService menuService;

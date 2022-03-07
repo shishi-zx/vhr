@@ -1,20 +1,24 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
+#    username: vhr_admin
+#    password: vhr_admin
     username: root
-    password: 123
-    url: jdbc:mysql://localhost:3306/vhr?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    password: shishi!159773
+    url: jdbc:mysql://39.106.194.73:3306/vhr?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   rabbitmq:
-    username: guest
-    password: guest
-    host: 127.0.0.1
-    publisher-confirms: true
+    username: admin
+    password: admin
+    host: 39.106.194.73
+#    publisher-confirms: true
     publisher-returns: true
+    publisher-confirm-type:
   redis:
-    host: 127.0.0.1
+    host: 39.106.194.73
     database: 0
     port: 6379
-    password: 123
+    password: vhr_admin
   cache:
     cache-names: menus_cache
 server:
@@ -23,4 +27,4 @@ server:
     enabled: true
 fastdfs:
   nginx:
-    host: http://192.168.91.128/
+    host: http://127.0.0.1/

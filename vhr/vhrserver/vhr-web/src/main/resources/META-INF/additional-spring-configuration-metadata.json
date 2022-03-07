@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "fastdfs.nginx.host",
+      "type": "java.lang.String",
+      "description": "Description for fastdfs.nginx.host."
+  }
+] }

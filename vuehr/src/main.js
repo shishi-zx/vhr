@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
 import {
     Button,
     Input,
@@ -99,6 +100,8 @@ Vue.use(Form);
 Vue.use(Tag);
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$message = Message
 
 import {postRequest} from "./utils/api";
 import {postKeyValueRequest} from "./utils/api";
@@ -114,6 +117,35 @@ Vue.prototype.putRequest = putRequest;
 Vue.prototype.deleteRequest = deleteRequest;
 Vue.prototype.getRequest = getRequest;
 
+// map 插件
+import VueAMap from 'vue-amap';   //引入高德
+import 'cesium/Widgets/widgets.css'
+
+(function(){
+    window._AMapSecurityConfig = {
+        securityJsCode:'0127fef420c805240609b1f3c93a27c1',
+    }
+})()
+Vue.use(VueAMap)
+
+VueAMap.initAMapApiLoader({
+
+    key: '7298cc5ab574e71720f80b6d0b83bf10',
+    //插件集合
+    plugin: [
+        'AMap.Geolocation',  //定位空间，用来获取和展示用户主机所在的经纬度位置
+        ' AMap.Autocomplete ',  //输入提示插件
+        ' AMap.PlaceSearch ', //POI搜索插件
+        ' AMap.Scale ',   //右下角缩略图插件，比例尺
+        ' AMap.OverView ', //地图鹰眼插件
+        ' AMap.ToolBar ',  //地图工具条
+        ' AMap.MapType ',  //类别切换空间，实现默认图层与卫星图，实施交通层之间切换的控制
+        ' AMap.PolyEditor ', //编辑 折线多边形
+        ' AMap.CircleEditor ',
+        "AMap.Geocoder"     //地图编码
+    ]
+});
+
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
@@ -127,6 +159,11 @@ router.beforeEach((to, from, next) => {
             next('/?redirect=' + to.path);
         }
     }
+})
+
+Vue.filter("dateFormat",function(str){
+    let t = new Date(str);
+    return t.getFullYear()+"-"+t.getMonth() + "-" + t.getDay()
 })
 
 new Vue({
